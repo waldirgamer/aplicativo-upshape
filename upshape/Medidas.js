@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const Measurements = () => {
+const Medidas = () => {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [result, setResult] = useState('');
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Measurements;
+export default Medidas;
