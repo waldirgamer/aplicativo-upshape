@@ -49,7 +49,7 @@ const Register = ({ navigation }) => {
         value={time}
       />
       <Button title="Salvar Alarme" onPress={handleSaveAlarm} />
-      <Button title="Meça sua massa" onPress={() => navigation.navigate('Measurements')} />
+      <Button title="Meça sua massa" onPress={() => navigation.navigate('Medidas')} />
       <Button title="Sair" onPress={() => navigation.navigate('Login')} />
     </View>
   );
