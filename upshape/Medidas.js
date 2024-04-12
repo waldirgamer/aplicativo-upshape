@@ -45,15 +45,31 @@ const Medidas = () => {
   const handleWeightChange = (text) => {
     // Remove caracteres inválidos do input e formata o valor
     let formattedInput = text.replace(/[^\d.]/g, ''); // Remove caracteres não numéricos e mantém apenas pontos
-
-    // Limita o número de casas decimais a duas
-    const parts = formattedInput.split('.');
-    if (parts.length > 1) {
-      formattedInput = parts[0] + '.' + parts[1].slice(0, 2);
+  
+    // Adiciona um zero invisível à esquerda se o ponto for adicionado
+     // Adiciona um zero invisível à esquerda se necessário
+  if (formattedInput.startsWith('.')) {
+    formattedInput = '0' + formattedInput;
+  } else if (formattedInput === '.') {
+    formattedInput = '0.';
+  }{
+      // Divide o texto em partes antes e depois do ponto
+      const parts = formattedInput.split('.');
+      // Se não houver dígitos à esquerda do ponto, adiciona um zero invisível
+      if (parts[0].length === 0) {
+        formattedInput = '0' + formattedInput;
+      }
     }
-
+  
+    // Limita o número de casas decimais a duas
+    const decimalParts = formattedInput.split('.');
+    if (decimalParts.length > 1) {
+      formattedInput = decimalParts[0] + '.' + decimalParts[1].slice(0, 2);
+    }
+  
     setWeight(formattedInput);
   };
+  
 
   const handleHeightChange = (text) => {
     // Remove caracteres inválidos do input e formata o valor
@@ -71,7 +87,7 @@ const Medidas = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Massa corporal</Text>
-      <TextInput
+      <TextInputMask
         style={styles.input}
         placeholder="Peso (KG)"
         keyboardType="numeric"
@@ -116,7 +132,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
-    marginBottom: 10,
+    marginBottom: 100,
     paddingLeft: 10,
   },
   result: {
