@@ -75,8 +75,12 @@ const Medidas = () => {
         style={styles.input}
         placeholder="Peso (KG)"
         keyboardType="numeric"
-        onChangeText={handleWeightChange}
+        type={'custom'}
+        options={{
+          mask: '999.99'
+        }}
         value={weight}
+        onChangeText={handleWeightChange}
       />
       <TextInputMask
         style={styles.input}
