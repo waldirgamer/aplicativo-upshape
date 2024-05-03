@@ -43,8 +43,8 @@ const Medidas = () => {
   };
 
   const handleWeightChange = (text) => {
-    // Remove caracteres inválidos do input e formata o valor
-    let formattedInput = text.replace(/[^\d.]/g, ''); // Remove caracteres não numéricos e mantém apenas pontos
+   // Substitui todas as vírgulas por pontos
+  let formattedInput = text.replace(/,/g, '.');
 
     // Limita o número de casas decimais a duas
     const decimalParts = formattedInput.split('.');
@@ -71,15 +71,14 @@ const Medidas = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Massa corporal</Text>
-      <TextInputMask
+      <TextInput
         style={styles.input}
         placeholder="Peso (KG)"
         keyboardType="numeric"
         type={'custom'}
-        options={{
-          mask: '99999'
-        }}
         value={weight}
+        maxLength={5} // Definindo o comprimento máximo para 4 caracteres
+
         onChangeText={handleWeightChange}
       />
       <TextInputMask
