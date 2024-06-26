@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Button, StatusBar, SafeAreaView } from 'react-native';
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -7,7 +7,7 @@ const Login = ({ navigation }) => {
 
   const handleLogin = () => {
     // Verifica se o usuário e senha estão corretos
-    if (username === 'teste' && password === '123') {
+    if (username === 'T' && password === '1') {
       // Redireciona para a tela de registro
       navigation.navigate('Register');
     } else {
@@ -17,38 +17,45 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("./src/assets/Logo.png")}
-        style={styles.logo}
-      />
-      <Text style={styles.title}>Bora Sheipar!!!</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        onChangeText={text => setUsername(text)}
-        value={username}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={text => setPassword(text)}
-        value={password}
-        secureTextEntry={true}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#84848c" />
+      <View style={styles.content}>
+        <Image
+          source={require("./src/assets/Logo.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.title}>Bora Sheipar!!!</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Usuario"
+          onChangeText={text => setUsername(text)}
+          value={username}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha-"
+          onChangeText={text => setPassword(text)}
+          value={password}
+          secureTextEntry={true}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f3f3ff',
+    backgroundColor: '#84848c',
+  },
+  content: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 20,
   },
   logo: {
     marginBottom: 20,

@@ -1,28 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import SQLite from 'react-native-sqlite-storage';
+
+const db = SQLite.openDatabase(
+  {
+    name: 'activitydb',
+    location: 'default',
+  },
+  () => {},
+  error => { console.log(error) }
+);
 
 const Register = ({ navigation }) => {
   const [activity, setActivity] = useState('');
   const [day, setDay] = useState('');
   const [time, setTime] = useState('');
 
+  useEffect(() => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS activities (id INTEGER PRIMARY KEY AUTOINCREMENT, activity TEXT, day TEXT, time TEXT)',
+        [],
+        () => { console.log('Table created successfully'); },
+        error => { console.log('Error creating table: ', error); }
+      );
+    });
+  }, []);
+
   const handleSaveAlarm = () => {
-    // Verifica se todos os campos estão preenchidos
     if (activity && day && time) {
-      // Cria uma string com os detalhes do alarme
-      const alarmDetails = `Atividade: ${activity}, Dia: ${day}, Hora: ${time}`;
-
-      // Aqui você pode adicionar lógica para salvar o alarme, como armazená-lo no armazenamento local ou enviar para um servidor
-
-      // Exibe uma mensagem de sucesso
-      Alert.alert('Sucesso', 'Alarme salvo com sucesso');
-
-      // Limpa os campos após salvar o alarme
-      setActivity('');
-      setDay('');
-      setTime('');
+      db.transaction(tx => {
+        tx.executeSql(
+          'INSERT INTO activities (activity, day, time) VALUES (?, ?, ?)',
+          [activity, day, time],
+          (tx, results) => {
+            if (results.rowsAffected > 0) {
+              Alert.alert('Sucesso', 'Alarme salvo com sucesso');
+              setActivity('');
+              setDay('');
+              setTime('');
+            } else {
+              Alert.alert('Erro', 'Falha ao salvar o alarme');
+            }
+          },
+          error => { console.log('Error inserting data: ', error); }
+        );
+      });
     } else {
-      // Caso contrário, exibe uma mensagem de erro
       Alert.alert('Erro', 'Por favor, preencha todos os campos');
     }
   };

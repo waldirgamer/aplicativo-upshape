@@ -58,6 +58,8 @@ const Medidas = () => {
   const handleHeightChange = (text) => {
     // Remove caracteres inválidos do input e formata o valor
     let formattedInput = text.replace(/[^\d.]/g, ''); // Remove caracteres não numéricos e mantém apenas pontos
+    if (parseFloat(formattedInput) > 2.99) {
+      formattedInput = '2.99';};
 
     // Limita o número de casas decimais a uma à direita e duas à esquerda
     const parts = formattedInput.split('.');
