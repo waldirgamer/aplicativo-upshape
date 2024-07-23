@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, StatusBar, SafeAreaView } from 'react-native';
-import _Database from './Database.js';
-
-import { openDatabase } from './Database.js'; // Ajuste o caminho conforme necessário
-
+import { openDatabase } from '../database'; // Ajuste o caminho conforme necessário
+import _Database from '../database'; // Ajuste o caminho conforme necessário
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -32,7 +30,7 @@ const Login = ({ navigation }) => {
       <StatusBar barStyle="dark-content" backgroundColor="#84848c" />
       <View style={styles.content}>
         <Image
-          source={require("./src/assets/Logo.png")}
+          source={require("../assets/Logo.png")}
           style={styles.logo}
         />
         <Text style={styles.title}>Bora Sheipar!!!</Text>

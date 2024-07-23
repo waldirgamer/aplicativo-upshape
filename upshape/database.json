@@ -1,21 +1,20 @@
 {
-    "description": "Interação com SQLite usando react-native-sqlite-storage",
-    "database_details": {
-      "database_name": "test.db",
-      "database_version": "1.0",
-      "database_displayname": "SQLite Test Database",
-      "database_size": 200000
-    },
-    "code": {
-      "import_sqlite": "import SQLite from 'react-native-sqlite-storage';",
-      "enable_debug": [
-        "SQLite.DEBUG(true);",
-        "SQLite.enablePromise(true);"
-      ],
-      "open_database": "export const openDatabase = () => { return new Promise((resolve, reject) => { SQLite.openDatabase(database_name, database_version, database_displayname, database_size).then(DB => { db = DB; resolve(DB); }).catch(error => { console.log(error); reject(error); }); }); };",
-      "create_table": "export const createTable = () => { return new Promise((resolve, reject) => { db.transaction(tx => { tx.executeSql(`CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)`).then(() => { resolve(); }).catch(error => { console.log(error); reject(error); }); }); }); };",
-      "insert_user": "export const insertUser = (name, age) => { return new Promise((resolve, reject) => { db.transaction(tx => { tx.executeSql(`INSERT INTO Users (name, age) VALUES (?, ?)`, [name, age]).then(([tx, results]) => { resolve(results); }).catch(error => { console.log(error); reject(error); }); }); }); };",
-      "get_users": "export const getUsers = () => { return new Promise((resolve, reject) => { db.transaction(tx => { tx.executeSql(`SELECT * FROM Users`).then(([tx, results]) => { let users = []; let len = results.rows.length; for (let i = 0; i < len; i++) { let row = results.rows.item(i); users.push(row); } resolve(users); }).catch(error => { console.log(error); reject(error); }); }); }); };"
-    }
+  "description": "Interação com SQLite usando react-native-sqlite-storage",
+  "database_details": {
+    "database_name": "test.db",
+    "database_version": "1.0",
+    "database_displayname": "SQLite Test Database",
+    "database_size": 200000
+  },
+  "code": {
+    "import_sqlite": "import SQLite from 'react-native-sqlite-storage';",
+    "enable_debug": [
+      "SQLite.DEBUG(true);",
+      "SQLite.enablePromise(true);"
+    ],
+    "open_database": "export const openDatabase = () => { return new Promise((resolve, reject) => { SQLite.openDatabase(database_name, database_version, database_displayname, database_size).then(DB => { db = DB; resolve(DB); }).catch(error => { console.log(error); reject(error); }); }); };",
+    "create_table": "export const createTable = () => { return new Promise((resolve, reject) => { db.transaction(tx => { tx.executeSql(`CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)`).then(() => { resolve(); }).catch(error => { console.log(error); reject(error); }); }); }); };",
+    "insert_user": "export const insertUser = (name, age) => { return new Promise((resolve, reject) => { db.transaction(tx => { tx.executeSql(`INSERT INTO Users (name, age) VALUES (?, ?)`, [name, age]).then(([tx, results]) => { resolve(results); }).catch(error => { console.log(error); reject(error); }); }); }); };",
+    "get_users": "export const getUsers = () => { return new Promise((resolve, reject) => { db.transaction(tx => { tx.executeSql(`SELECT * FROM Users`).then(([tx, results]) => { let users = []; let len = results.rows.length; for (let i = 0; i < len; i++) { let row = results.rows.item(i); users.push(row); } resolve(users); }).catch(error => { console.log(error); reject(error); }); }); }); };"
   }
-  
+}

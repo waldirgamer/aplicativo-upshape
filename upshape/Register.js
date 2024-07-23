@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
-
+import _Database from './Database.js';
+const _Database = require('./Database.js');
 const db = SQLite.openDatabase(
   {
     name: 'activitydb',
@@ -99,5 +100,5 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
 });
-
+console.log(_Database);
 export default Register;
